@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div id="divExterna">
+        <h1>Lista de Tarefas</h1>
+
+        <div class="inputRow">
+            <input id="input" type="text" placeholder="Nova tarefa...">
+            <button id="btnAdicionar" onclick="criarTarefa()">Adicionar</button>
+        </div>
+
+
+        <ul id="listaTarefas">
+
+        </ul>
+    </div>
+
+
+    <script>
+        async function carregarTarefas(){
+            const url = "http://localhost:8080/tarefas";
+
+            try{
+                const resposta = await fetch(url);
+                if(!resposta.ok){
+                    throw new Error(`Resposta: ${resposta.status}`);
+                }
+
+                const resultado = await resposta.json();
+
+                const listaTarefas = document.getElementById("listaTarefas");
+
+                listaTarefas.innerHTML = "";
+
+                resultado.forEach(tarefa => {listaTarefas.innerHTML += "<li>" + tarefa.descricao + "<button class='finalizado' onClick='deletarTarefa(" + tarefa.id + ")'>✓</button></li>"})
+            }
+
+            catch (erro){
+                console.log(erro.message);
+            }
+        }
+
+        document.getElementById("input").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") criarTarefa();
+        });
+
+        async function criarTarefa(){
+            const tarefa = document.getElementById("input").value;
+            if(tarefa.trim().length <= 0){
+                return;
+            }
+
+            await fetch("http://localhost:8080/tarefas", {
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify({descricao: tarefa})
+            });
+            document.getElementById("input").value = "";
+            document.getElementById("listaTarefas").innerHTML = "";
+            carregarTarefas();
+        }
+
+        async function deletarTarefa(id){
+            await fetch("http://localhost:8080/tarefas/" + id,{
+                method: "DELETE",
+            });
+            carregarTarefas();
+        }
+
+        carregarTarefas();
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+html {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+body {
+    padding-top: 10px;
+}
+
+#divExterna {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+}
+
+h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.inputRow {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+input {
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    width: 280px;
+    background-color: #3d5166;
+    color: #ecf0f1;
+}
+
+input::placeholder {
+    color: #a0b0c0;
+}
+
+#btnAdicionar {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #477483;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#btnAdicionar:hover {
+    background-color: #5a8fa0;
+}
+
+ul {
+    list-style: none;
+    width: 405px;
+    margin-top: 8px;
+}
+
+li {
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #3d5166;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.finalizado {
+    padding: 6px 12px;
+    background-color: transparent;
+    color: #ecf0f1;
+    border: 1px solid #ecf0f1;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.finalizado:hover {
+    background-color: #28bd28;
+    border-color: #28bd28;
+}
